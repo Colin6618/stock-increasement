@@ -1,0 +1,16 @@
+{
+  "name": "2nd_spectrum_code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test/verifyIllegalNumber.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "papaparse": "^5.4.1"
+  }
+}
