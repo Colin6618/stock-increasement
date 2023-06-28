@@ -2,10 +2,11 @@
   "name": "2nd_spectrum_code",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node test/verifyIllegalNumber.js"
+    "start": "node index.js",
+    "test": "node test/dataSample.js"
   },
   "keywords": [],
   "author": "",

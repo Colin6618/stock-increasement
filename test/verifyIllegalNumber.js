@@ -1,3 +1,4 @@
+import assert from "node:assert";
 let valueExceptions = [
   "--",
   "Lost",
@@ -16,9 +17,10 @@ let valueExceptions = [
   "-",
 ];
 
-// exception: empty string, space string
+// Do not consider empty string and space string
 
-console.log("Number.isNaN(), isNan(), Number(), Number.isNaN(), StringValue");
+// console.log("Number.isNaN(), isNan(), Number(), Number.isNaN(), StringValue");
 valueExceptions.forEach((v) => {
-  console.log(Number.isNaN(v), isNaN(v), Number(v), Number.isNaN(Number(v)), v);
+  // console.log(Number.isNaN(v), isNaN(v), Number(v), Number.isNaN(Number(v)), v);
+  assert.equal(Number.isNaN(Number(v)), true);
 });
