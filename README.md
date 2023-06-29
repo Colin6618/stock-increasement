@@ -23,3 +23,9 @@ Install the dependencies before run the main function. Use `npm start` or `node 
 ### Test
 
 Several test cases are ready in the test folder. Use `npm test` or `node --test` to run all test cases. Excution duration is also printed as test results.
+
+### Result
+
+Typical runtime duration is around 73 ms for a dataset of 10k rows.
+![SCR-20230628-s0q](https://github.com/Colin6618/stock-increasement/assets/3047309/8e598f22-d97b-4553-b034-c8bbaf75756f)
+
