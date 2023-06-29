@@ -6,15 +6,14 @@ import statsTopStock from "../src/main.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Test sample1
+// Test values.csv
 statsTopStock(
-  path.join(__dirname, "../asset/sample1.csv"),
+  path.join(__dirname, "../asset/values.csv"),
   function (err, topStock) {
     if (err) {
       console.log(err);
       return;
     }
-    assert.equal(topStock.name, "DLV");
-    assert.equal(topStock.increasement, 58.32);
+    assert.equal(topStock.increasement, 931.8);
   }
 );

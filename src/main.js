@@ -1,16 +1,35 @@
 import fs from "fs";
 import Papa from "papaparse";
 
+/*
++---------------------+              
+|  Load data chunks   |                         
++---------------------+              
+           |                         
++----------|----------+              
+| Clean and transform |              
++---------------------+              
+           |                         
++----------|----------+              
+| Calculate and update|              
++---------------------+              
+           |                         
++----------|----------+              
+|    Stream end       |              
++---------------------+   
+*/
+
 const stockMap = new Map();
-let topStock = { increasement: 0, name: "" }; // 100 times the increasement data
+let topStock = { increasement: 0, name: "" }; // 100 times the increasement value
 let validDataCount = 0;
 let inValidDataCount = 0;
 
 /**
- *
- * @param {string} filePath
+ * Given a file, statistics the data to get a stock with largest absolute increasement.
+ * @param {string} filePath |  path of the dataSet file
+ * @param {function} callback | function(err, data)
  */
-export default function statsTopStock(filePath, cb) {
+export default function statsTopStock(filePath, callback) {
   const options = { header: true };
 
   fs.createReadStream(filePath)
@@ -22,16 +41,20 @@ export default function statsTopStock(filePath, cb) {
       }
     })
     .on("end", () => {
-      console.log("Valid Items: ", validDataCount);
-      console.log("Invalid Items: ", inValidDataCount);
-      console.log("Total Items: ", validDataCount + inValidDataCount);
-      console.log("===Data Loaded===");
-      cb(topStock);
-      // printTopStock(currentTop);
+      // console.log(
+      //   "Valid, Invalid and Total Recordings: ",
+      //   validDataCount,
+      //   inValidDataCount,
+      //   validDataCount + inValidDataCount
+      // );
+      callback(null, getReadableResult());
+    })
+    .on("error", (err) => {
+      callback(err);
     });
 }
 /**
- * remove dirty data
+ * Remove dirty data
  * @param {Object} data
  * @returns {Object|undefined}
  */
@@ -54,7 +77,6 @@ function ETL(data = {}) {
  * keep the row with earliest date and with the latest date.
  * Key is stock name. Value is an array in ascending order by date.
  * @param {Object} row
- * @returns null
  */
 function handler(row) {
   if (!stockMap.has(row.Name)) {
@@ -67,7 +89,7 @@ function handler(row) {
       // remove the item with date in the middle
       stockRecords.splice(1, 1);
     }
-    refreshTopStock(stockRecords, row.Name);
+    refreshTopStock(stockRecords, row.Name); // to compare with the top stock
   }
 }
 
@@ -86,4 +108,10 @@ function refreshTopStock(stockRecords, name) {
       topStock.name = name;
     }
   }
+}
+
+function getReadableResult() {
+  topStock.increasement /= 100;
+  topStock.name = topStock.name.replace(/[\n\t]/g, "");
+  return topStock;
 }

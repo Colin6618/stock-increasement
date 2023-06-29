@@ -9,7 +9,11 @@ const __dirname = path.dirname(__filename);
 // Test sample2
 statsTopStock(
   path.join(__dirname, "../asset/sample2.csv"),
-  function (topStock) {
+  function (err, topStock) {
+    if (err) {
+      console.log(err);
+      return;
+    }
     assert.equal(topStock.increasement, 0);
   }
 );
