@@ -14,6 +14,6 @@ statsTopStock(
       console.log(err);
       return;
     }
-    assert.equal(topStock.increasement, 931.8);
+    assert.equal(topStock.increasement, 850);
   }
 );

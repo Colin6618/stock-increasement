@@ -1,14 +1,14 @@
 import path from "path";
 import statsTopStock from "./src/main.js";
 
-console.time("statsTopStock");
+console.time("statsTopStock duration");
 statsTopStock(path.resolve("./asset/values.csv"), function (err, data) {
   if (err) {
     console.error(err);
     return;
   }
   printTopStock(data);
-  console.timeEnd("statsTopStock"); // Print runtime duration in ms.
+  console.timeEnd("statsTopStock duration"); // Print runtime duration in ms.
 });
 
 /**
